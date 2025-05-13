@@ -1,0 +1,85 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<!-- Registrarse -->
+<section class="auth-container" id="signup-view">
+  <div class="container">
+    <div class="auth-card">
+      <div class="row g-0">
+        <div class="col-lg-6 auth-form-side">
+          <h2 class="auth-form-title">Crear una Cuenta</h2>
+            <p class="text-muted mb-4">Complete el formulario para registrarse y acceder a todas las funcionalidades del sistema.</p>
+            
+            <div class="social-login">
+              <a href="#" class="social-login-btn google">
+                <i class="fab fa-google"></i>
+              </a>
+              <a href="#" class="social-login-btn facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-login-btn apple">
+                <i class="fab fa-apple"></i>
+              </a>
+            </div>
+            
+            <div class="auth-divider">
+              <span>o</span>
+            </div>
+            
+            <form class="auth-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">Nombre</label>
+                  <input type="text" class="form-control" id="firstName" placeholder="Juan">
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Apellido</label>
+                  <input type="text" class="form-control" id="lastName" placeholder="Pérez">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="companyName">Nombre de la Empresa</label>
+                <input type="text" class="form-control" id="companyName" placeholder="Mi Empresa S.A. de C.V.">
+              </div>
+              
+              <div class="form-group">
+                <label for="signupEmail">Correo electrónico</label>
+                <input type="email" class="form-control" id="signupEmail" placeholder="tucorreo@empresa.com">
+              </div>
+              
+              <div class="form-group">
+                <label for="signupPassword">Contraseña</label>
+                <input type="password" class="form-control" id="signupPassword" placeholder="Mínimo 8 caracteres">
+              </div>
+   
+              <div class="form-group">
+                <label for="confirmPassword">Confirmar Contraseña</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Repite tu contraseña">
+              </div>
+              
+              <div class="terms-agree">
+                <input type="checkbox" id="terms">
+                <label for="terms">He leído y acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a></label>
+              </div>
+              
+              <button type="submit" class="btn btn-primary btn-submit">Crear Cuenta</button>
+            </form>
+            
+            <div class="auth-form-footer">
+              ¿Ya tienes una cuenta? <a href="#" onclick="toggleView('signin-view', 'signup-view')" class="text-primary">Inicia Sesión</a>
+            </div>
+          </div>
+          
+          <div class="col-lg-6 auth-image-side">
+            <div class="auth-image-content">
+              <img src="/api/placeholder/300/200" alt="Sistema de Nóminas" class="img-fluid mb-4">
+              <h3 class="fw-bold mb-3">Únete a NóminaPro</h3>
+              <p>Miles de empresas ya confían en nosotros para gestionar sus nóminas. Sea parte de la revolución en la gestión de pagos y recursos humanos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
