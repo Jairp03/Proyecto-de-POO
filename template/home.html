@@ -469,11 +469,17 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Informes</a>
           </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a>
+          </li>
         </ul>
+          {% else %}
         <div class="d-flex">
           <a href="{% url 'signin' %}" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
           <a href="{% url 'signup' %}" class="btn btn-primary">Registrarse</a>
         </div>
+          {% endif %}
       </div>
     </div>
   </nav>

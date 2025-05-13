@@ -9,65 +9,29 @@
         <div class="col-lg-6 auth-form-side">
           <h2 class="auth-form-title">Crear una Cuenta</h2>
             <p class="text-muted mb-4">Complete el formulario para registrarse y acceder a todas las funcionalidades del sistema.</p>
-            
-            <div class="social-login">
-              <a href="#" class="social-login-btn google">
-                <i class="fab fa-google"></i>
-              </a>
-              <a href="#" class="social-login-btn facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-login-btn apple">
-                <i class="fab fa-apple"></i>
-              </a>
-            </div>
-            
-            <div class="auth-divider">
-              <span>o</span>
-            </div>
-            
-            <form class="auth-form">
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="firstName">Nombre</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Juan">
-                </div>
-                <div class="form-group">
-                  <label for="lastName">Apellido</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Pérez">
-                </div>
+            <form class="auth-form" method="POST">
+              {{error}}
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Usuario</label>
+                <input type="username" name="username" id="username" class="form-control" placeholder="Nombre de usuario">
               </div>
               
               <div class="form-group">
-                <label for="companyName">Nombre de la Empresa</label>
-                <input type="text" class="form-control" id="companyName" placeholder="Mi Empresa S.A. de C.V.">
-              </div>
-              
-              <div class="form-group">
-                <label for="signupEmail">Correo electrónico</label>
-                <input type="email" class="form-control" id="signupEmail" placeholder="tucorreo@empresa.com">
-              </div>
-              
-              <div class="form-group">
-                <label for="signupPassword">Contraseña</label>
-                <input type="password" class="form-control" id="signupPassword" placeholder="Mínimo 8 caracteres">
+                <label for="password1">Contraseña</label>
+                <input type="password" name="password1" id="password1" class="form-control" placeholder="Mínimo 8 caracteres">
               </div>
    
               <div class="form-group">
-                <label for="confirmPassword">Confirmar Contraseña</label>
-                <input type="password" class="form-control" id="confirmPassword" placeholder="Repite tu contraseña">
+                <label for="password2">Confirmar Contraseña</label>
+                <input type="password" name="password2" id="password2" class="form-control" placeholder="Repite tu contraseña">
               </div>
               
-              <div class="terms-agree">
-                <input type="checkbox" id="terms">
-                <label for="terms">He leído y acepto los <a href="#">Términos y Condiciones</a> y la <a href="#">Política de Privacidad</a></label>
-              </div>
-              
-              <button type="submit" class="btn btn-primary btn-submit">Crear Cuenta</button>
+              <button type="submit" class="btn btn-primary btn-submit my-2">Crear Cuenta</button>
             </form>
             
             <div class="auth-form-footer">
-              ¿Ya tienes una cuenta? <a href="#" onclick="toggleView('signin-view', 'signup-view')" class="text-primary">Inicia Sesión</a>
+              ¿Ya tienes una cuenta? <a href="{% url 'signin' %}" class="text-primary">Inicia Sesión</a>
             </div>
           </div>
           

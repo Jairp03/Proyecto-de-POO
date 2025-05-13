@@ -9,49 +9,24 @@
           <div class="col-lg-6 auth-form-side">
             <h2 class="auth-form-title">Iniciar Sesión</h2>
             <p class="text-muted mb-4">Bienvenido de nuevo. Por favor, ingresa tus credenciales para acceder al sistema.</p>
-            
-            <div class="social-login">
-              <a href="#" class="social-login-btn google">
-                <i class="fab fa-google"></i>
-              </a>
-              <a href="#" class="social-login-btn facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" class="social-login-btn apple">
-                <i class="fab fa-apple"></i>
-              </a>
-            </div>
-            
-            <div class="auth-divider">
-              <span>o</span>
-            </div>
-            
-            <form class="auth-form">
+            <form class="auth-form" method="POST">
+              {{error}}
+              {% csrf_token %}
               <div class="form-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" class="form-control" id="email" placeholder="tucorreo@empresa.com">
+                <label for="username">Usuario</label>
+                <input type="username" name="username" class="form-control" id="username" placeholder="Nombre de usuario">
               </div>
               
               <div class="form-group">
                 <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="********">
+                <input type="password" name="password" class="form-control" id="password" placeholder="********">
               </div>
               
-              <div class="d-flex justify-content-between">
-                <div class="remember-me">
-                  <input type="checkbox" id="remember">
-                  <label for="remember">Recordarme</label>
-                </div>
-                <div class="forgot-password">
-                  <a href="#">¿Olvidaste tu contraseña?</a>
-                </div>
-              </div>
-              
-              <button type="submit" class="btn btn-primary btn-submit">Iniciar Sesión</button>
+              <button type="submit" class="btn btn-primary btn-submit my-2">Iniciar Sesión</button>
             </form>
             
             <div class="auth-form-footer">
-              ¿No tienes una cuenta? <a href="#" onclick="toggleView('signup-view', 'signin-view')" class="text-primary">Regístrate</a>
+              ¿No tienes una cuenta? <a href="{% url 'signup' %}" class="text-primary">Regístrate</a>
             </div>
           </div>
           
