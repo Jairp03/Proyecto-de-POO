@@ -50,11 +50,13 @@ def signin (request):
             login(request, user)
             return redirect('home')
 
+@login_required
 def logoutuser(request):
     logout(request)
     return redirect('home')
 
 #*****CRUD Cargos*****
+@login_required
 def create_cargo (request):
     context={'title':'Ingresar cargo'}
     print("metodo: ",request.method)
@@ -73,6 +75,7 @@ def create_cargo (request):
             context['form'] = form
             return render(request, 'cargos/create.html', context) 
 
+@login_required
 def update_cargo (request, id):
    context={'title':'Actualizar Cargo'}
    cargo = Cargo.objects.get(pk=id)
@@ -89,6 +92,7 @@ def update_cargo (request, id):
           context['form'] = form
           return render(request, 'cargos/create.html', context)
 
+@login_required
 def list_cargo (request):
     query= request.GET.get('q',None)
     print(query)
@@ -97,6 +101,7 @@ def list_cargo (request):
     context = {'cargos': cargos, 'title': 'Listado de nomina'} 
     return render(request, 'cargos/list.html', context)
 
+@login_required
 def delete_cargo (request, id):
     cargo=None
     try:
@@ -112,6 +117,7 @@ def delete_cargo (request, id):
         return render(request, 'cargos/delete.html', context)
     
 #*****CRUD Departamentos*****
+@login_required
 def create_dep (request):
     context={'title':'Ingresar departamento'}
     print("metodo: ",request.method)
@@ -130,6 +136,7 @@ def create_dep (request):
             context['form'] = form
             return render(request, 'departamentos/create.html', context) 
 
+@login_required
 def update_dep (request, id):
    context={'title':'Actualizar Departamento'}
    deps = Departamento.objects.get(pk=id)
@@ -146,6 +153,7 @@ def update_dep (request, id):
           context['form'] = form
           return render(request, 'departamentos/create.html', context)
 
+@login_required
 def list_dep (request):
     query= request.GET.get('q',None)
     print(query)
@@ -154,6 +162,7 @@ def list_dep (request):
     context = {'deps': deps, 'title': 'Listado de departamentos'} 
     return render(request, 'departamentos/list.html', context)
 
+@login_required
 def delete_dep (request, id):
     deps=None
     try:
@@ -169,6 +178,7 @@ def delete_dep (request, id):
         return render(request, 'departamentos/delete.html', context)
     
 #*****CRUD Tipo de contrato*****
+@login_required
 def create_contrato (request):
     context={'title':'Ingresar tipo de contrato'}
     print("metodo: ",request.method)
@@ -187,6 +197,7 @@ def create_contrato (request):
             context['form'] = form
             return render(request, 'contratos/create.html', context) 
 
+@login_required
 def update_contrato (request, id):
    context={'title':'Actualizar Contrato'}
    contrato = TipoContrato.objects.get(pk=id)
@@ -203,6 +214,7 @@ def update_contrato (request, id):
           context['form'] = form
           return render(request, 'contratos/create.html', context)
 
+@login_required
 def list_contrato (request):
     query= request.GET.get('q',None)
     print(query)
@@ -211,6 +223,7 @@ def list_contrato (request):
     context = {'contratos': contratos, 'title': 'Listado de nomina'} 
     return render(request, 'contratos/list.html', context)
 
+@login_required
 def delete_contrato (request, id):
     contrato=None
     try:
@@ -226,6 +239,7 @@ def delete_contrato (request, id):
         return render(request, 'contratos/delete.html', context)
 
 #*****CRUD Empleados*****
+@login_required
 def create_empleado (request):
     context={'title':'Ingresar el nombre del empleado'}
     print("metodo: ",request.method)
@@ -244,6 +258,7 @@ def create_empleado (request):
             context['form'] = form
             return render(request, 'empleados/create.html', context) 
 
+@login_required
 def update_empleado (request, id):
    context={'title':'Actualizar Empleado'}
    empleado = Empleado.objects.get(pk=id)
@@ -260,14 +275,16 @@ def update_empleado (request, id):
           context['form'] = form
           return render(request, 'empleados/create.html', context)
 
+@login_required
 def list_empleado (request):
     query= request.GET.get('q',None)
     print(query)
-    if query: empleados = Empleado.objects.filter(descripcion__icontains=query)
+    if query: empleados = Empleado.objects.filter(nombre__icontains=query)
     else: empleados = Empleado.objects.all()
     context = {'empleados': empleados, 'title': 'Listado de nomina'} 
     return render(request, 'empleados/list.html', context)
 
+@login_required
 def delete_empleado (request, id):
     empleado=None
     try:
@@ -283,6 +300,7 @@ def delete_empleado (request, id):
         return render(request, 'empleado/delete.html', context)
     
 #*****CRUD Rol*****
+@login_required
 def create_rol (request):
     context={'title':'Ingresar el nombre el Rol'}
     print("metodo: ",request.method)
@@ -301,6 +319,7 @@ def create_rol (request):
             context['form'] = form
             return render(request, 'roles/create.html', context) 
 
+@login_required
 def update_rol (request, id):
    context={'title':'Actualizar Rol'}
    rol = Rol.objects.get(pk=id)
@@ -317,14 +336,16 @@ def update_rol (request, id):
           context['form'] = form
           return render(request, 'roles/create.html', context)
 
+@login_required
 def list_rol (request):
     query = request.GET.get('q',None)
     print(query)
-    if query: roles = Rol.objects.filter(descripcion__icontains=query)
+    if query: roles = Rol.objects.filter(empleado__nombre__icontains=query)
     else: roles = Rol.objects.all()
     context = {'roles': roles, 'title': 'Listado de nomina'} 
     return render(request, 'roles/list.html', context)
 
+@login_required
 def delete_rol (request, id):
     rol=None
     try:
