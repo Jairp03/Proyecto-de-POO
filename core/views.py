@@ -4,8 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from core.forms import CargoForm, DepartamentoForm, ContratoForm, EmpleadoForm, RolForm
-from .models import Cargo, Departamento, TipoContrato, Empleado, Rol
+from core.forms import CargoForm, DepartamentoForm, ContratoForm, EmpleadoForm, RolForm, PermisoForm
+from .models import Cargo, Departamento, TipoContrato, Empleado, Rol, Permiso
 
 # Create your views here.
 #*****Autenticacion*****
@@ -308,7 +308,7 @@ def create_rol (request):
         
         form = RolForm()# instancia el formulario con los campos vacios
         context['form'] = form
-        return render(request, 'Roles/create.html', context)
+        return render(request, 'roles/create.html', context)
     else:
         #  print("entro por post")
         form = RolForm(request.POST) # instancia el formulario con los datos del post
@@ -359,3 +359,64 @@ def delete_rol (request, id):
     except:
         context = {'title':'Eliminar','rol':rol,'error':'Error al eliminar'}
         return render(request, 'rol/delete.html', context)
+    
+#*****CRUD Permisos*****
+@login_required
+def create_permiso (request):
+    context={'title':'Ingresar el tipo de permiso'}
+    print("metodo: ",request.method)
+    if request.method == "GET":
+        
+        form = PermisoForm()# instancia el formulario con los campos vacios
+        context['form'] = form
+        return render(request, 'permisos/create.html', context)
+    else:
+        #  print("entro por post")
+        form = PermisoForm(request.POST) # instancia el formulario con los datos del post
+        if form.is_valid():
+            form.save()
+            return redirect('core:list_permiso')
+        else:
+            context['form'] = form
+            return render(request, 'permisos/create.html', context) 
+
+@login_required
+def update_permiso (request, id):
+   context={'title':'Actualizar permiso'}
+   permiso = Permiso.objects.get(pk=id)
+   if request.method == "GET":
+      form = PermisoForm(instance=permiso)
+      context['form'] = form
+      return render(request, 'permisos/create.html', context)
+   else:
+      form = PermisoForm(request.POST,instance=permiso)
+      if form.is_valid():
+          form.save()
+          return redirect('core:list_permiso')
+      else:
+          context['form'] = form
+          return render(request, 'permiso/create.html', context)
+
+@login_required
+def list_permiso (request):
+    query = request.GET.get('q',None)
+    print(query)
+    if query: permisos = Permiso.objects.filter(empleado__nombre__icontains=query)
+    else: permisos = Permiso.objects.all()
+    context = {'permisos': permisos, 'title': 'Listado de nomina'} 
+    return render(request, 'permisos/list.html', context)
+
+@login_required
+def delete_permiso (request, id):
+    permiso=None
+    try:
+        permiso = Permiso.objects.get(pk=id)
+        if request.method == "GET":
+            context = {'title':'Eliminar permiso', 'permiso':permiso, 'error':''}
+            return render(request, 'permisos/delete.html',context)  
+        else: 
+            permiso.delete()
+            return redirect('core:list_permiso')
+    except:
+        context = {'title':'Eliminar', 'permiso':permiso,'error':'Error al eliminar'}
+        return render(request, 'permisos/delete.html', context)

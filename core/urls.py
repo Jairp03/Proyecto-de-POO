@@ -29,4 +29,9 @@ urlpatterns = [
     path('update_rol/<int:id>', views.update_rol, name="update_rol"),  
     path('list_rol', views.list_rol, name="list_rol"),
     path('delete_rol/<int:id>', views.delete_rol, name="delete_rol"),
+    # Permiso
+    path('create_permiso', views.create_permiso, name="create_permiso"),
+    path('update_permiso/<int:id>', views.update_permiso, name="update_permiso"),
+    path('list_permiso', views.list_permiso, name="list_permiso"),
+    path('delete_permiso/<int:id>', views.delete_permiso, name="delete_permiso"),
 ]

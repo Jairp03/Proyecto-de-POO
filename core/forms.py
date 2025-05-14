@@ -1,5 +1,5 @@
-from .models import Cargo, Departamento, TipoContrato, Empleado, Rol
-from django.forms import ModelForm, TextInput, DateInput, NumberInput
+from .models import Cargo, Departamento, TipoContrato, Empleado, Rol, TipoPermiso, Permiso
+from django.forms import ModelForm, TextInput, DateInput, NumberInput, CheckboxInput
 from django import forms
 class CargoForm(ModelForm):
     class Meta:
@@ -88,4 +88,29 @@ class RolForm(ModelForm):
             'tot_ing' : NumberInput(attrs={'class': 'form-control'}),
             'tot_des' : NumberInput(attrs={'class': 'form-control'}),
             'neto' : NumberInput(attrs={'class': 'form-control'})
+        }
+
+class PermisoForm(ModelForm):
+
+    EMPLEADO_CHOICES = Empleado.objects.all()
+    empleado = forms.ModelChoiceField(
+        queryset=EMPLEADO_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    TIPO_PERMISO_CHOICES = TipoPermiso.objects.all()
+    tipo_permiso = forms.ModelChoiceField(
+        queryset=TIPO_PERMISO_CHOICES,
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+
+    class Meta:
+        model = Permiso
+        fields = '__all__'
+
+        widgets = {
+            'fecha_permiso': DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'dias' : NumberInput(attrs={'class': 'form-control'}),
+            'horas' : NumberInput(attrs={'class': 'form-control'}),
+            'is_active' : CheckboxInput(attrs={'class': 'form-control'}),
         }

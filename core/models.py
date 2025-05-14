@@ -49,3 +49,23 @@ class Rol(models.Model):
 
     def __str__(self):
         return f"{self.empleado} - {self.empleado.cargo}"
+    
+class TipoPermiso(models.Model):
+
+    descripcion = models.CharField(max_length=100)
+    frecuencia_dias = models.BooleanField(default=True)
+    def __str__(self):
+        return self.descripcion
+
+class Permiso(models.Model):
+
+    empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE)
+    fecha_permiso = models.DateField()
+    tipo_permiso = models.ForeignKey(TipoPermiso, on_delete=models.CASCADE)
+    dias = models.PositiveIntegerField(null=True,blank=True)
+    horas = models.PositiveIntegerField(null=True,blank=True)
+    is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+
+        return f"Permiso de {self.empleado.nombre} - {self.tipo_permiso.descripcion}"
