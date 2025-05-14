@@ -443,6 +443,7 @@
       }
     }
   </style>
+  {% block css_extrs %}{% endblock %}
 </head>
 <body>
   <!-- Navbar -->
@@ -458,16 +459,19 @@
             <a class="nav-link" href="{% url 'home' %}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="{% url 'core:list_cargo' %}">Cargo</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Empleados</a>
+            <a class="nav-link" href="{% url 'core:list_empleado' %}">Empleados</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Nóminas</a>
+            <a class="nav-link" href="{% url 'core:list_dep' %}">Departamento</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Informes</a>
+            <a class="nav-link" href="{% url 'core:list_contrato' %}">Contratos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rol</a>
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item">
